@@ -1,0 +1,10 @@
+C:\Users\USUARIO\Downloads\PROYECTO PARCIAL 2\Forms\obj\Debug\Forms.csproj.AssemblyReference.cache
+C:\Users\USUARIO\Downloads\PROYECTO PARCIAL 2\Forms\obj\Debug\Forms.TXTNOMBRE.resources
+C:\Users\USUARIO\Downloads\PROYECTO PARCIAL 2\Forms\obj\Debug\Forms.Properties.Resources.resources
+C:\Users\USUARIO\Downloads\PROYECTO PARCIAL 2\Forms\obj\Debug\Forms.csproj.GenerateResource.cache
+C:\Users\USUARIO\Downloads\PROYECTO PARCIAL 2\Forms\obj\Debug\Forms.csproj.CoreCompileInputs.cache
+C:\Users\USUARIO\Downloads\PROYECTO PARCIAL 2\Forms\bin\Debug\Forms.exe.config
+C:\Users\USUARIO\Downloads\PROYECTO PARCIAL 2\Forms\bin\Debug\Forms.exe
+C:\Users\USUARIO\Downloads\PROYECTO PARCIAL 2\Forms\bin\Debug\Forms.pdb
+C:\Users\USUARIO\Downloads\PROYECTO PARCIAL 2\Forms\obj\Debug\Forms.exe
+C:\Users\USUARIO\Downloads\PROYECTO PARCIAL 2\Forms\obj\Debug\Forms.pdb

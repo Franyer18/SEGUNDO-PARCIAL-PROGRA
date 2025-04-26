@@ -1,0 +1,99 @@
+Cuestionario a responder:
+
+
+1.	En el método Crear de la clase JugadorService, ¿por qué se utiliza SCOPE_IDENTITY() en la consulta SQL y qué beneficio aporta al código
+El metodo de la clase jugadorService se utiliza SCOPE_IDENTITY() para obtner el ultimo valor agregado o recuperar el registro que se inserto de ultimo, el beneficio es que en multiple
+opciones garantiza se limita al ámbito específico de la instrucción SQL ejecutada.
+
+2.	En el método Eliminar del servicio de jugadores, ¿por qué se verifica la existencia de elementos en el inventario antes de eliminar un jugador y qué problema está previniendo esta comprobación?
+ Tiene como objetivo prevenir que la  base de datos tenga posibles errores en el desarrollo del sistema, datos invalidos o malos teclasos.
+
+3.	¿Qué ventaja ofrece la línea using var connection = _dbManager.GetConnection(); frente a crear y cerrar la conexión manualmente? Menciona un posible problema que podría ocurrir si no se usara esta estructura.
+nos ofrece una manera mas limpia y ordenada de gestionar los recursos en el programa en este caso en c#, uno de los posibles problemas desde mi punto de vista podria ser alguna posible coneccion abierta indefinida o fugas de informacion.
+
+
+4.	En la clase DatabaseManager, ¿por qué la variable _connectionString está marcada como readonly y qué implicaciones tendría para la seguridad si no tuviera este modificador?
+para garantizar que su valor solo pueda ser asignado durante la inicialización de la instancia de la clase o en el constructor, podria tener errores inpredisibles, o vulnabilidad en el codigo.
+
+5.	Si quisieras agregar un sistema de logros para los jugadores, ¿qué cambios realizarías en el modelo de datos actual y qué nuevos métodos deberías implementar en los servicios existentes?
+implementaria o crearia una base de datos para representar los datos de los logros obtenidos y algun tipo de reglas para desbloquer los logros.
+
+6.	¿Qué sucede con la conexión a la base de datos cuando ocurre una excepción dentro de un bloque using como el que se utiliza en los métodos del JugadorService?
+cuando ocurre un error de como este la conexion sige siendo estable y todo esto debido a la funcion o los bloques using ya que si no se usara exisitiria muchas conexiones abiertas.
+
+
+7.	En el método ObtenerTodos() del JugadorService, ¿qué ocurre si la consulta SQL no devuelve ningún jugador? ¿Devuelve null o una lista vacía? ¿Por qué crees que se diseñó de esta manera?
+Esto depende de cómo esté implementado el código, pero el diseño generalmente busca retornar una lista vacía por razones de buenas prácticas y manejo limpio del flujo de la aplicación.
+
+8.	Si necesitaras implementar una funcionalidad para registrar el tiempo jugado por cada jugador, ¿qué cambios harías en la clase Jugador y cómo modificarías los métodos del servicio para mantener actualizada esta información?
+agregaria un campo para el tiempo, ajustaria la tabla de jugadores imolementaria un metodo para el inicio y final del juego.
+
+9.	En el método TestConnection() de la clase DatabaseManager, ¿qué propósito cumple el bloque try-catch y por qué es importante devolver un valor booleano en lugar de simplemente lanzar la excepción?
+cumple con el manejo de erorres, se manejan esepcciones y devolver un valor booleano permite simplificar el diseño del programa y mejorar su eficiencia.
+
+10.	Si observas el patrón de diseño utilizado en este proyecto, ¿por qué crees que se separaron las clases en carpetas como Models, Services y Utils? ¿Qué ventajas ofrece esta estructura para el mantenimiento y evolución del proyecto?
+separa las carpetas desde mi punto de vista con una la finalidad  común en el desarrollo de software que sigue principios de diseño limpio y arquitectura bien organizada.
+
+11.	En la clase InventarioService, cuando se llama el método AgregarItem, ¿por qué es necesario usar una transacción SQL? ¿Qué problemas podría causar si no se implementara una transacción en este caso?
+es fundamental usar la transaccion sql para garantizar la consistencia y la integridad de los datos, especialmente en operaciones que pueden involucrar múltiples pasos
+
+12.	Observa el constructor de JugadorService: ¿Por qué recibe un DatabaseManager como parámetro en lugar de crearlo internamente? ¿Qué patrón de diseño se está aplicando y qué ventajas proporciona?
+ Recibir un DatabaseManager como parámetro en el constructor de JugadorService en lugar de crearlo internamente es una aplicación del patrón de diseño Inversión de Dependencias (Dependency Injection) 
+Este diseño mejora la modularidad, mantenibilidad, y escalabilidad del proyecto.
+
+13.	En el método ObtenerPorId de JugadorService, ¿qué ocurre cuando se busca un ID que no existe en la base de datos? ¿Cuál podría ser una forma alternativa de manejar esta situación?
+Cuando se busca un ID que no existe en la base de datos en el método ObtenerPorId de JugadorService se enfreta en multiples situaciones de problemas, una forma alternativa seria usar un patron opcional.
+
+14.	Si necesitas implementar un sistema de "amigos" donde los jugadores puedan conectarse entre sí, ¿cómo modificarías el modelo de datos y qué nuevos métodos agregarías a los servicios existentes?
+modificaria el modelo de datos Es recomendable utilizar índices compuestos en jugador1_id y jugador2_id para mejorar las búsquedas.También podría incluirse un campo iniciado_por para saber qué jugador inició la solicitud de amistad.
+
+15.	En la implementación actual del proyecto, ¿cómo se maneja la fecha de creación de un jugador? ¿Se establece desde el código o se delega esta responsabilidad a la base de datos? ¿Cuáles son las ventajas del enfoque utilizado?
+
+La fecha de creación de un jugador se maneja en la base de datos, como parte de los datos almacenados al insertar el registro.
+
+Ventajas: Centralización: Garantiza que la fecha sea precisa y consistente y Automatización: Evita errores manuales y simplifica el código.
+
+16.	¿Por qué en el método GetConnection() de DatabaseManager se crea una nueva instancia de SqlConnection cada vez en lugar de reutilizar una conexión existente? ¿Qué implicaciones tendría para el rendimiento y la concurrencia?
+
+Se crea una nueva instancia de SqlConnection cada vez para garantizar que cada operación tenga su propia conexión independiente, evitando conflictos entre procesos.
+
+Implicaciones:	Rendimiento: SQL Server usa "pooling" de conexiones automáticamente, lo que reduce el costo de crear nuevas conexiones 	Concurrencia: Reutilizar conexiones manualmente podría causar errores si varios hilos intentan usar la misma conexión al mismo tiempo.
+
+17.	Cuando se actualiza un recurso en el inventario, ¿qué ocurriría si dos usuarios intentan modificar el mismo recurso simultáneamente? ¿Cómo podrías mejorar el código para manejar este escenario?
+
+Si dos usuarios intentan modificar el mismo recurso simultáneamente, podría ocurrir un
+conflicto de concurrencia, dejando datos inconsistentes.
+
+Mejora: Implementar bloqueos (LOCK) o usar transacciones para asegurar que las actualizaciones se realicen de forma segura y evitar cambios simultáneos.
+
+18.	En el método Actualizar de JugadorService, ¿por qué es importante verificar el valor de rowsAffected después de ejecutar la consulta? ¿Qué información adicional proporciona al usuario?
+
+Es importante verificar rowsAffected para confirmar si se actualizó algún registro. Esto informa al usuario si la operación fue exitosa o si no se encontró al jugador, ayudando a entender el resultado.
+ 
+19.	Si quisieras implementar un sistema de registro (logging) para seguir todas las operaciones realizadas en la base de datos, ¿dónde colocarías este código y cómo lo implementarías para afectar mínimamente la estructura actual?
+
+Pondría el registro (logging) en DatabaseManager o en los métodos de los servicios y usaría herramientas como Serilog o NLog para guardar datos sobre las operaciones en archivos o una tabla llamada Logs. Esto no cambia mucho el código actual.
+20.	Observa cómo se maneja la relación entre jugadores e inventario en el proyecto. Si necesitaras agregar una nueva entidad "Mundo" donde cada jugador puede existir en múltiples mundos, ¿cómo modificarías el esquema de la base de datos y la estructura del código para implementar esta funcionalidad?
+
+Esquema de datos: Agrega las tablas Mundos y JugadorMundo a la base de datos.
+Modelos y servicios: Crea un modelo Mundo y un servicio MundoService para manejar la lógica de los mundos.
+Relación entre entidades: Modifica el JugadorService para asociar jugadores a mundos.
+
+21.	¿Qué es un SqlConnection y cómo se usa?
+
+Es una clase en C# que se usa como un cable que conecta tu programa con una base de datos. Sirve para que puedas leer o guardar información en esa base de datos.
+Ejemplo:
+
+SqlConnection conexion = new SqlConnection("aquí va la dirección de la base de datos"); conexion.Open(); // Se conecta
+conexion.Close(); // Se desconecta
+22.	¿Para qué sirven los SqlParameter?
+Sirven para enviar datos a la base de forma segura, en vez de poner los datos directo en el texto de la consulta, usas un parámetro.
+
+Ejemplo:
+
+SqlCommand comando = new SqlCommand("SELECT * FROM Usuarios WHERE Nombre = @nombre", conexion);
+
+comando.Parameters.AddWithValue("@nombre", "noe"); @nombre es como una cajita vacía en la consulta.
+"noe" es el valor que metes en esa cajita.
+
+
